@@ -19,12 +19,11 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.hybris.doterra.process.tax.sabrix.services.taxcalculationservice.OutdataInvoiceType;
-import com.hybris.tax.custom.sabrix.DoterraTaxService;
+import com.hybris.tax.custom.core.SabrixCall;
 
 
 @Controller
@@ -34,35 +33,15 @@ public class TaxcalculationgenericHelloController
 	private TaxcalculationgenericService taxcalculationgenericService;
 
 	@Autowired
-	private DoterraTaxService doterrataxService;
+	private SabrixCall sabrixCall;
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String printWelcome1(final ModelMap model)
-	{
-		//model.addAttribute("logoUrl", taxcalculationgenericService.getHybrisLogoUrl(PLATFORM_LOGO_CODE));
-		return "welcome";
-	}
 
-	@RequestMapping(value = "/logo", method = RequestMethod.GET)
-	public String printLogo(final ModelMap model)
-	{
-		//model.addAttribute("logoUrl", taxcalculationgenericService.getHybrisLogoUrl(PLATFORM_LOGO_CODE));
-		return "welcome logo";
-	}
-
-	@RequestMapping(value = "/facad", method = RequestMethod.GET)
+	@RequestMapping(value = "/taxcal", method = RequestMethod.GET)
 	public OutdataInvoiceType printWelcome(final AbstractOrderModel cart, final Map<Integer, Map<String, String>> priceDetails,
 			final UserGroupModel userGroup)
 	{
-		try
-		{
-			return doterrataxService.taxCalculation(cart, priceDetails, userGroup);
-		}
-		catch (final Exception e)
-		{
-			// YTODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		return null;
+		//doterrataxService.taxCalculation(cart, priceDetails, userGroup);
+
 	}
 }

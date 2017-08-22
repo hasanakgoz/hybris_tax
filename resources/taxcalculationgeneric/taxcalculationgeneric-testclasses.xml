@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="utf-8"?><testclasses><taxcalculationgeneric><testclass>de.hybris.platform.taxes.jalo.TaxcalculationgenericTest</testclass><testclass>de.hybris.platform.taxes.service.impl.DefaultTaxcalculationgenericServiceIntegrationTest</testclass></taxcalculationgeneric></testclasses>

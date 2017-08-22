@@ -1,20 +1,20 @@
 package de.hybris.platform.taxes.service.impl;
 
-import static org.fest.assertions.Assertions.assertThat;
 import static de.hybris.platform.taxes.constants.TaxcalculationgenericConstants.PLATFORM_LOGO_CODE;
+import static org.fest.assertions.Assertions.assertThat;
 
 import de.hybris.bootstrap.annotations.IntegrationTest;
 import de.hybris.platform.core.model.media.MediaModel;
 import de.hybris.platform.servicelayer.ServicelayerBaseTest;
 import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
 import de.hybris.platform.servicelayer.search.FlexibleSearchService;
+import de.hybris.platform.taxes.service.TaxcalculationgenericService;
 
 import javax.annotation.Resource;
 
 import org.junit.Before;
 import org.junit.Test;
-import de.hybris.platform.taxes.service.TaxcalculationgenericService;
-import de.hybris.platform.taxes.service.impl.DefaultTaxcalculationgenericService;
+
 
 
 /**
