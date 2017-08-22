@@ -12,10 +12,6 @@
 package de.hybris.platform.taxes.controller;
 
 import de.hybris.platform.core.model.order.AbstractOrderModel;
-import de.hybris.platform.core.model.user.UserGroupModel;
-import de.hybris.platform.taxes.service.TaxcalculationgenericService;
-
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,25 +19,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.hybris.doterra.process.tax.sabrix.services.taxcalculationservice.OutdataInvoiceType;
-import com.hybris.tax.custom.core.SabrixCall;
+import com.hybris.tax.custom.core.ISabrixCall;
 
 
 @Controller
 public class TaxcalculationgenericHelloController
 {
 	@Autowired
-	private TaxcalculationgenericService taxcalculationgenericService;
+	private ISabrixCall sabrixCall;
 
-	@Autowired
-	private SabrixCall sabrixCall;
-
-
-	@RequestMapping(value = "/taxcal", method = RequestMethod.GET)
-	public OutdataInvoiceType printWelcome(final AbstractOrderModel cart, final Map<Integer, Map<String, String>> priceDetails,
-			final UserGroupModel userGroup)
+	@RequestMapping(value = "/sabrixcall", method = RequestMethod.GET)
+	public OutdataInvoiceType printWelcome(final AbstractOrderModel cart)
 	{
-		return null;
-		//doterrataxService.taxCalculation(cart, priceDetails, userGroup);
+		return sabrixCall.taxCalculation(cart);
 
 	}
 }

@@ -64,15 +64,16 @@ import com.hybris.doterra.process.tax.sabrix.services.taxcalculationservice.Zone
 /**
  *
  */
-public class SabrixCall
+public class SabrixCallImpl implements ISabrixCall
 {
-	private static final Logger LOG = Logger.getLogger(SabrixCall.class);
+	private static final Logger LOG = Logger.getLogger(SabrixCallImpl.class);
 	private OndemandHystrixCommandFactory ondemandHystrixCommandFactory;
 	private OndemandHystrixCommandConfiguration hystrixCommandConfig;
 	private static ObjectPool<ProxyWrapper<TaxCalculationService>> pool = null;
 	private Service service = null;
 
-	public OutdataInvoiceType taxCalculation(final AbstractOrderModel cart) throws Exception
+	@Override
+	public OutdataInvoiceType taxCalculation(final AbstractOrderModel cart)
 	{
 		LOG.warn("***************TAX CALCULATION BEGINS******************");
 		/* Create the service instance */
@@ -180,12 +181,12 @@ public class SabrixCall
 		catch (final TaxCalculationFault_Exception ex)
 		{
 			isSuccess = false;
-			LOG.error("DoterraTaxServiceImpl  Tax Exception:", ex);
+			LOG.error("SabrixTax  Tax Exception:", ex);
 		}
 		catch (final Exception exception)
 		{
 			isSuccess = false;
-			LOG.error("DoterraTaxServiceImpl  Exception:", exception);
+			LOG.error("SabrixTax  Exception:", exception);
 			throw exception;
 		}
 		finally
@@ -254,7 +255,7 @@ public class SabrixCall
 				totalDiscount = totalDiscount + discount.getAppliedValue();
 			}
 		}
-		LOG.warn("DoterraTaxServiceImpl:Total discounts" + totalDiscount);
+		LOG.warn("SabrixTax:Total discounts" + totalDiscount);
 		return totalDiscount;
 	}
 
@@ -300,7 +301,7 @@ public class SabrixCall
 			final long b1 = java.lang.System.currentTimeMillis();
 			populateShiptoAddress(address, invoiceType);
 			final long b2 = java.lang.System.currentTimeMillis();
-			LOG.warn("DoterraTaxServiceImpl: Time Took To Execute populateShipAddress Method" + (int) ((b2 - b1) / 1000) % 60);
+			LOG.warn("SabrixTax: Time Took To Execute populateShipAddress Method" + (int) ((b2 - b1) / 1000) % 60);
 		}
 		else if (null != userModel.getAddresses() && !userModel.getAddresses().isEmpty())
 		{
@@ -333,8 +334,7 @@ public class SabrixCall
 				}
 			}
 			final long c2 = java.lang.System.currentTimeMillis();
-			LOG.warn("DoterraTaxServiceImpl: Time Taken To Execute While Loop To Populate ShipToAddress"
-					+ (int) ((c2 - c1) / 1000) % 60);
+			LOG.warn("SabrixTax: Time Taken To Execute While Loop To Populate ShipToAddress" + (int) ((c2 - c1) / 1000) % 60);
 		}
 		else
 		{
@@ -467,7 +467,7 @@ public class SabrixCall
 				}
 			}
 			final long f2 = java.lang.System.currentTimeMillis();
-			LOG.warn("DoterraTaxServiceImpl: Global Discounts Applicable / For loop" + (int) ((f2 - f1) / 1000) % 60);
+			LOG.warn("SabrixTax: Global Discounts Applicable / For loop" + (int) ((f2 - f1) / 1000) % 60);
 		}
 		return shippingDiscount;
 	}
@@ -485,7 +485,7 @@ public class SabrixCall
 		//bp.getRequestContext().put("javax.xml.ws.client.receiveTimeout", connectionTimeout);
 		bp.getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, url);
 		final long p2 = java.lang.System.currentTimeMillis();
-		LOG.warn("DoterraTaxServiceImpl: Time Took To Set Timeout Until A Response Is Received" + (int) ((p2 - p1) / 1000) % 60);
+		LOG.warn("SabrixTax: Time Took To Set Timeout Until A Response Is Received" + (int) ((p2 - p1) / 1000) % 60);
 		final Binding binding = bp.getBinding();
 		return binding;
 	}
